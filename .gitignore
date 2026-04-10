@@ -1,0 +1,15 @@
+# Ignore generated outputs
+outputs/
+
+# RStudio temporary and session files
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional log files
+*.log
