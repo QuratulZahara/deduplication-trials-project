@@ -15,21 +15,42 @@ This project implements a two-phase deduplication workflow for trial datasets fr
 ```
 deduplication-trials-project/
 ├── data/
-│   └── raw/                              ← PUT YOUR INPUT FILES HERE
-│       ├── pubmed_main.csv
-│       ├── pubmed_protocol.csv
-│       ├── wos_main.csv
-│       ├── wos_protocol.csv
-│       ├── openalex_main.csv
-│       └── openalex_protocol.csv
-├── outputs/                              ← OUTPUT FILES WILL BE HERE
-│   ├── Phase1_pubmed_deduplicated.csv
-│   ├── Phase1_wos_deduplicated.csv
-│   ├── Phase1_openalex_deduplicated.csv
-│   ├── FINAL_deduplicated_trials.csv     ← FINAL OUTPUT (CSV)
-│   └── FINAL_deduplicated_trials.ris     ← FINAL OUTPUT (RIS)
+│   └── raw/
+│       ├── Davis_2017/
+│       │   ├── pubmed_main.csv
+│       │   ├── pubmed_protocol.csv
+│       │   ├── wos_main.csv
+│       │   ├── wos_protocol.csv
+│       │   ├── openalex_main.csv
+│       │   └── openalex_protocol.csv
+│       ├── Delgado-Lista_2016/
+│       │   ├── pubmed_main.csv
+│       │   ├── pubmed_protocol.csv
+│       │   ├── wos_protocol.csv
+│       │   ├── openalex_main.csv
+│       │   └── openalex_protocol.csv
+│       └── Sofi_Dinu_2018/
+│           ├── pubmed_main.csv
+│           ├── pubmed_protocol.csv
+│           ├── wos_main.csv
+│           ├── wos_protocol.csv
+│           └── openalex_protocol.csv
+├── outputs/
+│   ├── Davis_2017/
+│   │   ├── Phase1_pubmed_deduplicated.csv
+│   │   ├── Phase1_wos_deduplicated.csv
+│   │   ├── Phase1_openalex_deduplicated.csv
+│   │   ├── FINAL_deduplicated_trials.csv
+│   │   ├── FINAL_deduplicated_trials.ris
+│   │   └── SUMMARY.md
+│   ├── Delgado-Lista_2016/
+│   │   └── ...
+│   └── Sofi_Dinu_2018/
+│       └── ...
 ├── scripts/
 │   └── deduplication_workflow.R          ← Main R script
+├── WORKFLOW_EXECUTION_LOG.md
+├── SUMMARY.md
 └── README.md
 ```
 
@@ -74,12 +95,21 @@ install.packages("stringr")
 ```
 
 ### Execution
-1. Open the script in RStudio:
+1. Open `scripts/deduplication_workflow.R` in RStudio.
+2. Update the trial name near the top of the script:
+   ```r
+   trial_name <- "Sofi_Dinu_2018"
    ```
-   scripts/deduplication_workflow.R
+   Replace `Sofi_Dinu_2018` with the folder name inside `data/raw/` for the trial you want to run.
+3. Save the script.
+4. In the RStudio console, run:
+   ```r
+   source("scripts/deduplication_workflow.R")
    ```
-2. Click **"Run"** or press `Ctrl+Shift+Enter`
+5. Watch the console output for completion messages.
+6. Find results in `outputs/[TrialName]/`.
 
+> Note: If a trial is missing one of the engine files (for example `openalex_main.csv`), the script still runs. It will use the available files for that engine and continue deduplication across all valid Phase 1 results.
 ---
 
 ## Deduplication Process Details
@@ -119,6 +149,38 @@ install.packages("stringr")
 ### Final Output Files
 - **`FINAL_deduplicated_trials.csv`** - Final dataset in CSV format
 - **`FINAL_deduplicated_trials.ris`** - Final dataset in RIS format (compatible with Rayyan, Zotero, etc.)
+
+---
+
+## Git / GitHub
+
+### Track this project with Git
+A Git repository is already initialized in this project.
+
+### Recommended files to track
+- `scripts/deduplication_workflow.R`
+- `README.md`
+- `WORKFLOW_EXECUTION_LOG.md`
+- `SUMMARY.md`
+
+### Ignore generated outputs
+A `.gitignore` file is included to skip generated files in `outputs/`.
+
+### Push to GitHub
+If you want to push the project to GitHub, use these commands in PowerShell:
+```powershell
+cd c:\Users\hp\deduplication-trials-project
+git remote add origin https://github.com/QuratulZahara/deduplication-trials-project.git
+git branch -M main
+git push -u origin main
+```
+
+If you make changes later, use:
+```powershell
+git add .
+git commit -m "Describe your change"
+git push
+```
 
 ---
 
