@@ -26,7 +26,7 @@ setwd("c:\\Users\\hp\\deduplication-trials-project")
 # ----------------------------------------------------------
 
 # SPECIFY THE TRIAL NAME HERE (for easy modification when processing different trials)
-trial_name <- "Mayr_Itsiopoulos_2018"
+trial_name <- "Sotos-Prieto_2017"
 
 # Define the three search engines and their associated files (organized by trial)
 search_engines <- list(
